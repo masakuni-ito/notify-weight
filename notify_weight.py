@@ -3,6 +3,7 @@ import requests
 import json
 import datetime
 import urllib.parse
+import math
 
 def make_weight_graph_url(data):
     chart_config = {
@@ -20,9 +21,9 @@ def make_weight_graph_url(data):
             "scales": {
                 "yAxes": [{
                     "ticks": {
-                        "min": 70,
-                        "max": 96,
-                        "stepSize": 2
+                        "min": math.ceil(min([float(item['quantity']) for item in data]) - 5),
+                        "max": math.ceil(max([float(item['quantity']) for item in data]) + 2),
+                        "stepSize": 1
                     }
                 }]
             }
