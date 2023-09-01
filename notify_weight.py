@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import datetime
 import urllib.parse
 
 def make_weight_graph_url(data):
@@ -59,7 +60,10 @@ if __name__ == "__main__":
 
     try:
 
-        data = get_pixela_graph_pixels_list(20230101, 20230808)
+        today = datetime.date.today()
+        start_of_year = datetime.date(today.year, 1, 1)
+
+        data = get_pixela_graph_pixels_list(start_of_year.strftime('%Y%m%d'), today.strftime('%Y%m%d'))
         url = make_weight_graph_url(data)
 
         message = '<{}|Changes in my body weight.>'.format(url)
